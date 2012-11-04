@@ -11,7 +11,7 @@ fun! vim_addon_mru#ShowMRUList()
   call tovl#ui#filter_list#ListView({
         \ 'number' : 1,
         \ 'selectByIdOrFilter' : 1,
-        \ 'Continuation' : library#Function('exec "e ".escape(substitute(ARGS[0]," |[^|]*$", "", ""), " ")'),
+        \ 'Continuation' : funcref#Function('exec "e ".escape(substitute(ARGS[0]," |[^|]*$", "", ""), " ")'),
         \ 'items' : files,
         \ 'cmds' : ['wincmd J'],
         \ 'aligned' : 1
