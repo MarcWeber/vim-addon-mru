@@ -27,5 +27,6 @@ fun! vim_addon_mru#Remember(event)
   let item = n.' | '.a:event
   call filter(c, 'stridx(v:val, '.string(n.' ').')'. '!= 0')
   call insert(c, item , 0)
+  let c = c[:s:c.count]
   call writefile(c, s:c.file)
 endf
