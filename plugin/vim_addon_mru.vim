@@ -2,7 +2,7 @@
 if !exists('g:vim_addon_mru') | let g:vim_addon_mru = {} | endif | let s:c = g:vim_addon_mru
 
 " mapping
-let s:c.lhs = get(s:c, 'lhs', '<m-o><m-r>')
+let s:c.lhs = get(s:c, 'lhs', '\rf')
 " remember that many files:
 let s:c.count = get(s:c, 'count', 1000)
 " remember on buf edit events:
