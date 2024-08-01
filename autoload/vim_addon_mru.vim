@@ -14,6 +14,7 @@ fun! vim_addon_mru#ShowMRUList()
     " normal 200u
     setlocal noswapfile
     nnoremap <buffer> <cr> gf
+    call feedkeys("/")
     return
   endif
 
