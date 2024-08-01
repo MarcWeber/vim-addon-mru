@@ -1,5 +1,7 @@
 if !exists('g:vim_addon_mru') | let g:vim_addon_mru = {} | endif | let s:c = g:vim_addon_mru
 
+let s:c.buffer_only = get(s:c, 'buffer_only', 1)
+
 fun! vim_addon_mru#Read()
   return filereadable(s:c.file)
         \ ? readfile(s:c.file)
@@ -7,6 +9,14 @@ fun! vim_addon_mru#Read()
 endf
 
 fun! vim_addon_mru#ShowMRUList()
+  if s:c.buffer_only
+    exec 'e '.fnameescape(s:c.file)
+    " normal 200u
+    setlocal noswapfile
+    nnoremap <buffer> <cr> gf
+    return
+  endif
+
   let files = vim_addon_mru#Read()
   call tovl#ui#filter_list#ListView({
         \ 'number' : 1,
