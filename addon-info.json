@@ -1,7 +1,0 @@
-{
-  "dependencies" : {
-    "vim-addon-mw-utils": {},
-    "vim-addon-other": {}
-  },
-  "description" : "haxe completion for Vim"
-}

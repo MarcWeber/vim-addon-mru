@@ -9,25 +9,16 @@ fun! vim_addon_mru#Read()
 endf
 
 fun! vim_addon_mru#ShowMRUList()
-  if s:c.buffer_only
-    exec 'e '.fnameescape(s:c.file)
-    " normal 200u
-    setlocal noswapfile
-    nnoremap <buffer> <cr> gf
-    call feedkeys("/")
-    return
-  endif
-
-  let files = vim_addon_mru#Read()
-  call tovl#ui#filter_list#ListView({
-        \ 'number' : 1,
-        \ 'selectByIdOrFilter' : 1,
-        \ 'Continuation' : funcref#Function('exec "e ".escape(substitute(ARGS[0]," |[^|]*$", "", ""), " ")'),
-        \ 'items' : files,
-        \ 'cmds' : ['wincmd J'],
-        \ 'aligned' : 1
-        \ })
-  " \ 'keys' : ['event', 'file'],
+  " use different buffer so that no 'want to reload' pops up over and over
+  " again if you use gf to visit many files
+  enew
+  exec 'r '.fnameescape(s:c.file)
+  " normal 200u
+  setlocal noswapfile
+  nnoremap <buffer> <cr> gf
+  redraw
+  call feedkeys("/")
+  return
 endf
 
 fun! vim_addon_mru#Remember(event)
